@@ -1,0 +1,16 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "src\\Payments.Api\\Payments.Api.csproj",
+        "Action": "Start",
+        "DebugTarget": "Payments.Api"
+      },
+      {
+        "Path": "src\\Payments.Worker\\Payments.Worker.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

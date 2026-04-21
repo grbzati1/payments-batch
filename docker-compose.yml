@@ -1,0 +1,36 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    ports:
+      - "8080:8080"
+    environment:
+      ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__PaymentsDb: Data Source=/data/payments.db
+      Processing__PollIntervalSeconds: 2
+      Processing__RetryDelaySeconds: 5
+      Processing__MaxRetryCount: 3
+      Processing__StaleProcessingThresholdSeconds: 60
+      FakeBank__Mode: random
+    volumes:
+      - payments_data:/data
+
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile.worker
+    environment:
+      ConnectionStrings__PaymentsDb: Data Source=/data/payments.db
+      Processing__PollIntervalSeconds: 2
+      Processing__RetryDelaySeconds: 5
+      Processing__MaxRetryCount: 3
+      Processing__StaleProcessingThresholdSeconds: 60
+      FakeBank__Mode: random
+    volumes:
+      - payments_data:/data
+    depends_on:
+      - api
+
+volumes:
+  payments_data:
