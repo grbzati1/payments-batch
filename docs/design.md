@@ -289,6 +289,12 @@ Event-driven architecture using:
 
 ---
 
+## Disaster Recovery (future)
+
+The current implementation does not include full disaster recovery capabilities, as it is designed for local execution and demonstration. In production, the system would adopt a cloud-native resilience and disaster recovery strategy aligned with Azure best practices.
+
+---
+
 ## Next steps
 
 - Replace polling with Service Bus + outbox pattern
